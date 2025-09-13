@@ -25,8 +25,8 @@ jobs:
 
     - name: Run bot and send message
       env:
-        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        CHAT_ID: ${{ secrets.CHAT_ID }}
+        BOT_TOKEN: ${{ secrets.8447527648:AAH8tGSND0HXHjYOhnDIbGsqRUiit7unyOs }}
+        CHAT_ID: ${{ secrets.8439126917 }}
       run: |
         output=$(python bitcoin_bot.py)
         curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
