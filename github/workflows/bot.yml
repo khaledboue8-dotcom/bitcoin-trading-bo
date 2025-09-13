@@ -29,7 +29,7 @@ jobs:
         CHAT_ID: ${{ secrets.8439126917 }}
       run: |
         output=$(python bitcoin_bot.py)
-        curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
-          -d chat_id="$CHAT_ID" \
+        curl -s -X POST "https://api.telegram.org/bot$8447527648:AAH8tGSND0HXHjYOhnDIbGsqRUiit7unyOs/sendMessage" \
+          -d chat_id="$8439126917" \
           -d text="$output" \
           -d parse_mode=HTML
