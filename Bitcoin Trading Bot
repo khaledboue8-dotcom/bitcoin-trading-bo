@@ -1,0 +1,35 @@
+name: Bitcoin Trading Bot
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # كل 30 دقيقة
+  workflow_dispatch:  # للتشغيل اليدوي
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas numpy ccxt talib-binary scikit-learn requests
+
+    - name: Run bot and send message
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+      run: |
+        output=$(python bitcoin_bot.py)
+        curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
+          -d chat_id="$CHAT_ID" \
+          -d text="$output" \
+          -d parse_mode=HTML
